@@ -13,8 +13,8 @@ class AssetManager:
 
     def init_tensors(self, global_tensor_dict, num_keep_in_env):
         self.env_asset_state_tensor = global_tensor_dict["env_asset_state_tensor"]
-        self.asset_min_state_ratio = global_tensor_dict["asset_min_state_ratio"]
-        self.asset_max_state_ratio = global_tensor_dict["asset_max_state_ratio"]
+        self.asset_min_state = global_tensor_dict["asset_min_state_ratio"]
+        self.asset_max_state = global_tensor_dict["asset_max_state_ratio"]
         self.env_bounds_min = (
             global_tensor_dict["env_bounds_min"]
             .unsqueeze(1)
@@ -56,16 +56,10 @@ class AssetManager:
             )
             num_obstacles_per_env = self.num_keep_in_env
 
-        sampled_asset_state_ratio = torch_rand_float_tensor(
-            self.asset_min_state_ratio, self.asset_max_state_ratio
-        )
-        self.env_asset_state_tensor[env_ids, :, 0:3] = torch_interpolate_ratio(
-            min=self.env_bounds_min,
-            max=self.env_bounds_max,
-            ratio=sampled_asset_state_ratio[..., 0:3],
-        )[env_ids, :, 0:3]
+        sampled_asset_states = torch_rand_float_tensor(self.asset_min_state[env_ids, :, :], self.asset_max_state[env_ids, :, :])
+        self.env_asset_state_tensor[env_ids, :, 0:3] = sampled_asset_states[:, :, 0:3]
         self.env_asset_state_tensor[env_ids, :, 3:7] = quat_from_euler_xyz_tensor(
-            sampled_asset_state_ratio[env_ids, :, 3:6]
+            sampled_asset_states[:, :, 3:6]
         )
         # put those obstacles not needed in the environment outside
         self.env_asset_state_tensor[env_ids, num_obstacles_per_env:, 0:3] = -1000.0

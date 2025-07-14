@@ -181,9 +181,7 @@ class BaseMultirotor(BaseRobot):
         # init_state tensor if of the format [ratio_x, ratio_y, ratio_z, roll, pitch, yaw, 1.0 (for maintaining shape), vx, vy, vz, wx, wy, wz]
         random_state = torch_rand_float_tensor(self.min_init_state, self.max_init_state)
 
-        self.robot_state[env_ids, 0:3] = torch_interpolate_ratio(
-            self.env_bounds_min, self.env_bounds_max, random_state[:, 0:3]
-        )[env_ids]
+        self.robot_state[env_ids, 0:3] = random_state[env_ids, 0:3]
 
         # logger.debug(
         #     f"Random state: {random_state[0]}, min init state: {self.min_init_state[0]}, max init state: {self.max_init_state[0]}"
