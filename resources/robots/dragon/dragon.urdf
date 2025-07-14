@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<robot name="multirotor">
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.0"/>
+      <geometry>
+        <!-- <sphere radius="0.05"/> -->
+        <box size="0.15 0.05 0.05"/>
+      </geometry>
+      <material name="White">
+        <color rgba="1 1 1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <!-- <sphere radius="0.05"/> -->
+        <box size="0.14526 0.17312 0.0748"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.40220"/>
+      <inertia ixx="536026.23e-9" ixy="11779.26e-9" ixz="-14649.71e-9" iyx="11779.26e-9" iyy="642831.67e-9" iyz="-11471.79e-9" izx="-14649.71e-9" izy="-11471.79e-9" izz="744280.99e-9"/>
+    </inertial>
+  </link>
+  <link name="camera">
+    <visual>
+      <origin xyz="0.05 0.0 0.0"/>
+      <geometry>
+        <box size="0.10 0.03 0.03"/>
+      </geometry>
+      <material name="Blue">
+        <color rgba="0.1 0.1 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="base_link_to_camera" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="camera"/>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.52359877559 0.0"/> 
+  </joint>
+  <link name="arm_motor_0">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.113"/>
+      </geometry>
+      <material name="Orange">
+        <color rgba="1 0.423 0.03921568627 1.0"/>
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.113"/>
+      </geometry>
+    </collision> -->
+    <inertial>
+      <mass value="0.000001"/>
+      <inertia ixx="1e-9" ixy="1e-9" ixz="1e-9" iyx="1e-9" iyy="1e-9" iyz="1e-9" izx="1e-9" izy="1e-9" izz="1e-9"/>
+    </inertial>
+  </link>
+  <joint name="base_link_to_arm_motor_0" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="arm_motor_0"/>
+      <origin xyz="0.036315 -0.04328 0.0" rpy="-1.5707963267948968 2.220446049250313e-16 -2.3561944901923453"/> 
+  </joint>
+  <link name="motor_0">
+    <visual>
+    <origin xyz=" 0 0 0 " rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.05"/>
+      </geometry>
+      <material name="Blue">
+        <color rgba="0.4 0.0 0.6 1.0"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.03307"/>
+      <inertia ixx="1892.71e-9" ixy="0.0" ixz="0.07e-9" iyx="0.0" iyy="1892.70e-9" iyz="0.03e-9" izx="0.07e-9" izy="0.03e-9" izz="2452.02e-9"/>
+    </inertial>
+  </link>
+  <joint name="base_link_to_motor_0" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="motor_0"/>
+    <origin xyz="0.07263 -0.08656 0.0" rpy="0.0 0.0 0.0"/> 
+  </joint>
+  <link name="arm_motor_1">
+    <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.113"/>
+      </geometry>
+      <material name="Orange">
+        <color rgba="1 0.423 0.03921568627 1.0"/>
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.113"/>
+      </geometry>
+    </collision> -->
+    <inertial>
+      <mass value="0.000001"/>
+      <inertia ixx="1e-9" ixy="1e-9" ixz="1e-9" iyx="1e-9" iyy="1e-9" iyz="1e-9" izx="1e-9" izy="1e-9" izz="1e-9"/>
+    </inertial>
+  </link>
+  <joint name="base_link_to_arm_motor_1" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="arm_motor_1"/>
+      <origin xyz="-0.036315 -0.04328 0.0" rpy="1.5707963267948968 2.220446049250313e-16 -0.7853981633974482"/> 
+  </joint>
+  <link name="motor_1">
+    <visual>
+    <origin xyz=" 0 0 0 " rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.05"/>
+      </geometry>
+      <material name="Blue">
+        <color rgba="0.6 0.0 0.4 1.0"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.03307"/>
+      <inertia ixx="1892.71e-9" ixy="0.0" ixz="0.07e-9" iyx="0.0" iyy="1892.70e-9" iyz="0.03e-9" izx="0.07e-9" izy="0.03e-9" izz="2452.02e-9"/>
+    </inertial>
+  </link>
+  <joint name="base_link_to_motor_1" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="motor_1"/>
+    <origin xyz="-0.07263 -0.08656 0.0" rpy="0.0 0.0 0.0"/> 
+  </joint>
+  <link name="arm_motor_2">
+    <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.113"/>
+      </geometry>
+      <material name="Orange">
+        <color rgba="1 0.423 0.03921568627 1.0"/>
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.113"/>
+      </geometry>
+    </collision> -->
+    <inertial>
+      <mass value="0.000001"/>
+      <inertia ixx="1e-9" ixy="1e-9" ixz="1e-9" iyx="1e-9" iyy="1e-9" iyz="1e-9" izx="1e-9" izy="1e-9" izz="1e-9"/>
+    </inertial>
+  </link>
+  <joint name="base_link_to_arm_motor_2" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="arm_motor_2"/>
+      <origin xyz="-0.036315 0.04328 0.0" rpy="1.5707963267948968 0.0 -2.3561944901923453"/> 
+  </joint>
+  <link name="motor_2">
+    <visual>
+    <origin xyz=" 0 0 0 " rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.05"/>
+      </geometry>
+      <material name="Blue">
+        <color rgba="0.4 0.0 0.6 1.0"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.03307"/>
+      <inertia ixx="1892.71e-9" ixy="0.0" ixz="0.07e-9" iyx="0.0" iyy="1892.70e-9" iyz="0.03e-9" izx="0.07e-9" izy="0.03e-9" izz="2452.02e-9"/>
+    </inertial>
+  </link>
+  <joint name="base_link_to_motor_2" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="motor_2"/>
+    <origin xyz="-0.07263 0.08656 0.0" rpy="0.0 0.0 0.0"/> 
+  </joint>
+  <link name="arm_motor_3">
+    <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.113"/>
+      </geometry>
+      <material name="Orange">
+        <color rgba="1 0.423 0.03921568627 1.0"/>
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.113"/>
+      </geometry>
+    </collision> -->
+    <inertial>
+      <mass value="0.000001"/>
+      <inertia ixx="1e-9" ixy="1e-9" ixz="1e-9" iyx="1e-9" iyy="1e-9" iyz="1e-9" izx="1e-9" izy="1e-9" izz="1e-9"/>
+    </inertial>
+  </link>
+  <joint name="base_link_to_arm_motor_3" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="arm_motor_3"/>
+      <origin xyz="0.036315 0.04328 0.0" rpy="-1.5707963267948968 0.0 -0.7853981633974482"/> 
+  </joint>
+  <link name="motor_3">
+    <visual>
+    <origin xyz=" 0 0 0 " rpy="0 0 0"/> 
+      <geometry>
+        <cylinder radius="0.01" length="0.05"/>
+      </geometry>
+      <material name="Blue">
+        <color rgba="0.6 0.0 0.4 1.0"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.03307"/>
+      <inertia ixx="1892.71e-9" ixy="0.0" ixz="0.07e-9" iyx="0.0" iyy="1892.70e-9" iyz="0.03e-9" izx="0.07e-9" izy="0.03e-9" izz="2452.02e-9"/>
+    </inertial>
+  </link>
+  <joint name="base_link_to_motor_3" type="fixed" dont_collapse="true">
+    <parent link="base_link"/>
+    <child link="motor_3"/>
+    <origin xyz="0.07263 0.08656 0.0" rpy="0.0 0.0 0.0"/> 
+  </joint>
+</robot>
