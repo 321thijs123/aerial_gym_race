@@ -12,6 +12,7 @@ LEFT_WALL_SEMANTIC_ID = 11
 RIGHT_WALL_SEMANTIC_ID = 12
 BOTTOM_WALL_SEMANTIC_ID = 13
 TOP_WALL_SEMANTIC_ID = 14
+GATE_SEMANTIC_ID = 30
 
 
 class asset_state_params:
@@ -596,3 +597,50 @@ class back_wall(asset_state_params):
     per_link_semantic = False
     semantic_id = BACK_WALL_SEMANTIC_ID
     color = [100, 200, 210]
+
+class gate(asset_state_params):
+    num_assets = 4
+
+    asset_folder = f"{AERIAL_GYM_DIRECTORY}/resources/models/environment_assets/gates"
+    file = "gate.urdf"
+
+    collision_mask = 1  # objects with the same collision mask will not collide
+
+    min_state_ratio = [
+        -5.0,
+        -5.0,
+        0.75,
+        0.0,
+        0.0,
+        -np.pi,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+    ]
+    max_state_ratio = [
+        5.0,
+        5.0,
+        2.75,
+        0.0,
+        0.0,
+        np.pi,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+    ]
+
+    keep_in_env = True
+
+    collapse_fixed_joints = True
+    specific_filepath = "cube.urdf"
+    per_link_semantic = False
+    semantic_id = GATE_SEMANTIC_ID
+    # color = [100, 200, 210]
