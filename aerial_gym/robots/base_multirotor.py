@@ -291,6 +291,22 @@ class BaseMultirotor(BaseRobot):
         self.robot_body_linvel[:] = quat_rotate_inverse(self.robot_orientation, self.robot_linvel)
         self.robot_body_angvel[:] = quat_rotate_inverse(self.robot_orientation, self.robot_angvel)
 
+    def apply_gyroscopic_effects(self):
+        if not hasattr(self.cfg, 'gyro_effects'):
+            return
+        
+        RPM_TO_RAD_S = 2 * torch.pi / 60
+        current_rpm = torch.sqrt(self.control_allocator.motor_model.current_motor_thrust / self.control_allocator.motor_model.motor_thrust_constant)
+        current_rad_s = current_rpm * RPM_TO_RAD_S
+
+        L_rotor = self.cfg.gyro_effects.rotor_inertia * current_rad_s * self.motor_directions
+        rotor_axis = torch.tensor(self.cfg.gyro_effects.rotor_axis, device=self.device).view(1, 1, 3)
+        L_rotor_vec = L_rotor.unsqueeze(-1) * rotor_axis
+
+        body_omega = self.robot_body_angvel.unsqueeze(1)
+        gyro_torque = torch.cross(body_omega, L_rotor_vec, dim=-1)
+        self.robot_torque_tensors[:, self.application_mask, 0:3] += gyro_torque
+
     def step(self, action_tensor):
         """
         Update the state of the quadrotor. This function is called every simulation step.
@@ -302,4 +318,5 @@ class BaseMultirotor(BaseRobot):
         # calling controller leads to control allocation happening, and
         self.call_controller()
         self.simulate_drag()
+        self.apply_gyroscopic_effects()
         self.apply_disturbance()
