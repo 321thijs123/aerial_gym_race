@@ -46,7 +46,7 @@ class AssetManager:
         # better to leave this class to manipulate the state tensors.
 
     def reset(self, num_obstacles_per_env):
-        self.reset_idx(torch.arange(self.env_asset_state_tensor.shape[0]), num_obstacles_per_env)
+        self.reset_idx(torch.arange(self.env_asset_state_tensor.shape[0], device=self.env_asset_state_tensor.device), num_obstacles_per_env)
 
     def reset_idx(self, env_ids, num_obstacles_per_env=0):
         if num_obstacles_per_env < self.num_keep_in_env:
@@ -57,9 +57,29 @@ class AssetManager:
             num_obstacles_per_env = self.num_keep_in_env
 
         sampled_asset_states = torch_rand_float_tensor(self.asset_min_state[env_ids, :, :], self.asset_max_state[env_ids, :, :])
+
+        min_dist = 2.0
+
+        for i in range(1,num_obstacles_per_env):
+            while True:
+                distances = sampled_asset_states[:, :i, 0:3] - sampled_asset_states[:, i, 0:3].unsqueeze(1)
+                too_close = torch.any(torch.norm(distances, dim=2) < min_dist, dim=1)
+
+                if torch.sum(too_close) == 0:
+                    break
+
+                too_close_ids = env_ids[too_close]
+
+                sampled_asset_states[too_close, i, 0:3] = torch_rand_float_tensor(self.asset_min_state[too_close_ids, i, 0:3], self.asset_max_state[too_close_ids, i, 0:3])
+
         self.env_asset_state_tensor[env_ids, :, 0:3] = sampled_asset_states[:, :, 0:3]
         self.env_asset_state_tensor[env_ids, :, 3:7] = quat_from_euler_xyz_tensor(
             sampled_asset_states[:, :, 3:6]
         )
+        
+        if self.env_asset_state_tensor.size(dim=1) > 1:
+            self.env_asset_state_tensor[env_ids, -1, :3] = self.env_asset_state_tensor[env_ids, -2, :3]
+            self.env_asset_state_tensor[env_ids, -1, 2] += 1.8
+
         # put those obstacles not needed in the environment outside
         self.env_asset_state_tensor[env_ids, num_obstacles_per_env:, 0:3] = -1000.0
