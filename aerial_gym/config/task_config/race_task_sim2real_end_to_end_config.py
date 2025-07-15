@@ -17,7 +17,7 @@ class task_config:
     episode_len_steps = 3000
     return_state_before_reset = False
     reward_parameters = { }
-    crash_dist = 20.0
+    crash_dist = 40.0
 
     action_limit_max = torch.ones(action_space_dim,device=device) * 6.0 #1466.9 / 1000 * 9.81 #6.0
     action_limit_min = torch.ones(action_space_dim,device=device) * 0.0

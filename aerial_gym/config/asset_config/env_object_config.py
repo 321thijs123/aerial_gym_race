@@ -607,8 +607,8 @@ class gate(asset_state_params):
     collision_mask = 1  # objects with the same collision mask will not collide
 
     min_state_ratio = [
-        -5.0,
-        -5.0,
+        -10.0,
+        -10.0,
         0.75,
         0.0,
         0.0,
@@ -622,9 +622,9 @@ class gate(asset_state_params):
         0.0,
     ]
     max_state_ratio = [
-        5.0,
-        5.0,
-        2.75,
+        10.0,
+        10.0,
+        3.75,
         0.0,
         0.0,
         np.pi,
