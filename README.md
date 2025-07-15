@@ -29,4 +29,4 @@ To run this task execute, `PATH_TO_WEIGHTS` should be replaced by the path to th
 python3 runner.py --task=race_task_camera --play --checkpoint=PATH_TO_WEIGHTS --num_envs=1
 ```
 
-![Race Task FPV video](./docs/videos/race_fpv.mp4)
+![Race Task FPV video](./docs/gifs/race_fpv.gif)
