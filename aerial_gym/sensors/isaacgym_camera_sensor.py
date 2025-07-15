@@ -147,8 +147,9 @@ class IsaacGymCameraSensor(BaseSensor):
         for env_id in range(self.num_envs):
             for cam_id in range(self.cfg.num_sensors):
                 # the depth values are in -ve z axis, so we need to flip it to positive
-                self.pixels[env_id, cam_id] = -self.depth_tensors[env_id][cam_id]
                 self.rgb_pixels[env_id, cam_id] = self.color_tensors[env_id][cam_id]
+                if self.cfg.depth_camera:
+                    self.pixels[env_id, cam_id] = -self.depth_tensors[env_id][cam_id]
                 if self.cfg.segmentation_camera:
                     self.segmentation_pixels[env_id, cam_id] = self.segmentation_tensors[env_id][
                         cam_id
@@ -167,13 +168,14 @@ class IsaacGymCameraSensor(BaseSensor):
 
     def apply_range_limits(self):
         """ """
-        # logger.debug("Applying range limits")
-        self.pixels[self.pixels > self.cfg.max_range] = self.cfg.far_out_of_range_value
-        self.pixels[self.pixels < self.cfg.min_range] = self.cfg.near_out_of_range_value
-        # logger.debug("[DONE] Applying range limits")
+        if self.cfg.depth_camera:
+            # logger.debug("Applying range limits")
+            self.pixels[self.pixels > self.cfg.max_range] = self.cfg.far_out_of_range_value
+            self.pixels[self.pixels < self.cfg.min_range] = self.cfg.near_out_of_range_value
+            # logger.debug("[DONE] Applying range limits")
 
     def normalize_observation(self):
-        if self.cfg.normalize_range and self.cfg.pointcloud_in_world_frame == False:
+        if self.cfg.depth_camera and self.cfg.normalize_range and self.cfg.pointcloud_in_world_frame == False:
             # logger.debug("Normalizing pointcloud values")
             self.pixels[:] = self.pixels / self.cfg.max_range
         if self.cfg.pointcloud_in_world_frame == True:

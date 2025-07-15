@@ -5,7 +5,7 @@ This is a fork of the [Aerial Gym Simulator](https://www.github.com/ntnu-arl/aer
 * Racing environment with randomly generated gates.
 * Racing task with gate-passing detection.
 
-![Aerial Gym Simulator](./docs/gifs/race.gif)
+![Race Task](./docs/gifs/race.gif)
 
 ## Installation
 Refer to the installation section of the [getting started](https://ntnu-arl.github.io/aerial_gym_simulator/2_getting_started/#installation) page of Aerial Gym Simulator, but clone this repository instead.
@@ -22,4 +22,11 @@ In the command below replace `PATH_TO_WEIGHTS` with the path to the weights of t
 python3 runner.py --task=race_task_sim2real_end_to_end --play --checkpoint=PATH_TO_WEIGHTS --num_envs=1
 ```
 
+## Generating an FPV video of a trained policy
+FPV Videos like the one shown below can be recorded automatically using the `race_task_camera` task. The generated video is has a resoltion of 1280x960 at 100fps and is saved to a folder called `camera_output`.
+To run this task execute, `PATH_TO_WEIGHTS` should be replaced by the path to the weights of the trained policy:
+```BASH
+python3 runner.py --task=race_task_camera --play --checkpoint=PATH_TO_WEIGHTS --num_envs=1
+```
 
+![Race Task FPV video](./docs/videos/race_fpv.mp4)

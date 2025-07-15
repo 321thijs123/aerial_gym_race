@@ -26,7 +26,10 @@ class BaseSensor(ABC):
 
         if self.cfg.sensor_type in ["lidar", "camera", "stereo_camera"]:
             # for IGE and warp sensors
-            self.pixels = global_tensor_dict["depth_range_pixels"]
+            if self.cfg.depth_camera:
+                self.pixels = global_tensor_dict["depth_range_pixels"]
+            else:
+                self.pixels = None
             if self.cfg.segmentation_camera:
                 self.segmentation_pixels = global_tensor_dict["segmentation_pixels"]
             else:

@@ -9,3 +9,4 @@ runs/
 nn/
 
 train_dir/
+aerial_gym/rl_training/rl_games/camera_output

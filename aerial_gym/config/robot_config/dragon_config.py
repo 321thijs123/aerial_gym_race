@@ -2,8 +2,8 @@ import numpy as np
 
 from aerial_gym import AERIAL_GYM_DIRECTORY
 
-from aerial_gym.config.sensor_config.camera_config.base_depth_camera_config import (
-    BaseDepthCameraConfig,
+from aerial_gym.config.sensor_config.camera_config.fpv_camera_config import (
+    FpvCameraConfig,
 )
 from aerial_gym.config.sensor_config.lidar_config.base_lidar_config import (
     BaseLidarConfig,
@@ -49,7 +49,7 @@ class DragonCfg:
 
     class sensor_config:
         enable_camera = False
-        camera_config = BaseDepthCameraConfig
+        camera_config = FpvCameraConfig
 
         enable_lidar = False
         lidar_config = BaseLidarConfig  # OSDome_64_Config
@@ -168,3 +168,7 @@ class DragonCfg:
             thrust_to_torque_ratio = 0.01
             use_discrete_approximation = True
             integration_scheme = "rk4" #"euler"
+
+class DragonWithCameraCfg(DragonCfg):
+    class sensor_config(DragonCfg.sensor_config):
+        enable_camera = True
