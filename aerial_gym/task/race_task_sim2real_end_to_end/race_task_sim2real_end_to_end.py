@@ -362,7 +362,7 @@ def compute_reward(
     # Reward for not rotating
     smooth_reward = -torch.abs(angvels_err[:,2])
 
-    reward = gate_passings * 200 + 15 * towards_gate_reward + look_reward * 5 + smooth_reward * 0.2 + 0.01 
+    reward = gate_passings * 200 - 0 * crashes + 15 * towards_gate_reward + look_reward * 5 + smooth_reward * 0.2 + 0.01
 
     return reward, crashes
 
