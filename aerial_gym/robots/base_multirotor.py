@@ -295,9 +295,9 @@ class BaseMultirotor(BaseRobot):
         if not hasattr(self.cfg, 'gyro_effects'):
             return
         
-        RPM_TO_RAD_S = 2 * torch.pi / 60
-        current_rpm = torch.sqrt(self.control_allocator.motor_model.current_motor_thrust / self.control_allocator.motor_model.motor_thrust_constant)
-        current_rad_s = current_rpm * RPM_TO_RAD_S
+        RPS_TO_RAD_S = 2 * torch.pi
+        current_rps = torch.sqrt(self.control_allocator.motor_model.current_motor_thrust / self.control_allocator.motor_model.motor_thrust_constant)
+        current_rad_s = current_rps * RPS_TO_RAD_S
 
         L_rotor = self.cfg.gyro_effects.rotor_inertia * current_rad_s * self.motor_directions
         rotor_axis = torch.tensor(self.cfg.gyro_effects.rotor_axis, device=self.device).view(1, 1, 3)

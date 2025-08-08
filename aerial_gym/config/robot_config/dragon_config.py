@@ -156,15 +156,15 @@ class DragonCfg:
 
         class motor_model_config:
             use_rps = True
-            motor_thrust_constant_min = 1.32581395e-8
-            motor_thrust_constant_max = 1.32581395e-8
-            motor_time_constant_increasing_min = 0.047
-            motor_time_constant_increasing_max = 0.047
-            motor_time_constant_decreasing_min = 0.047
-            motor_time_constant_decreasing_max = 0.047
+            motor_thrust_constant_min = 4.772e-5
+            motor_thrust_constant_max = 4.772e-5
+            motor_time_constant_increasing_min = 0.04
+            motor_time_constant_increasing_max = 0.06
+            motor_time_constant_decreasing_min = 0.04
+            motor_time_constant_decreasing_max = 0.06
             max_thrust = 1466.9 / 1000 * 9.81
             min_thrust = 0.0
-            max_thrust_rate = 100000.0
+            max_thrust_rate = 5000000.0
             thrust_to_torque_ratio = 0.01
             use_discrete_approximation = True
             integration_scheme = "rk4" #"euler"

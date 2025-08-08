@@ -19,7 +19,7 @@ class task_config:
     reward_parameters = { }
     crash_dist = 40.0
 
-    action_limit_max = torch.ones(action_space_dim,device=device) * 6.0 #1466.9 / 1000 * 9.81 #6.0
+    action_limit_max = torch.ones(action_space_dim,device=device) * 8.0 #1466.9 / 1000 * 9.81 #6.0
     action_limit_min = torch.ones(action_space_dim,device=device) * 0.0
 
     def process_actions_for_task(actions, min_limit, max_limit):
