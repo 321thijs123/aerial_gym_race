@@ -109,7 +109,7 @@
   <joint name="base_link_to_arm_motor_1" type="fixed" dont_collapse="true">
     <parent link="base_link"/>
     <child link="arm_motor_1"/>
-      <origin xyz="-0.036315 -0.04328 0.0" rpy="1.5707963267948968 2.220446049250313e-16 -0.7853981633974482"/> 
+      <origin xyz="-0.036315 0.04328 0.0" rpy="1.5707963267948968 0.0 -2.3561944901923453"/> 
   </joint>
   <link name="motor_1">
     <visual>
@@ -129,7 +129,7 @@
   <joint name="base_link_to_motor_1" type="fixed" dont_collapse="true">
     <parent link="base_link"/>
     <child link="motor_1"/>
-    <origin xyz="-0.07263 -0.08656 0.0" rpy="0.0 0.0 0.0"/> 
+    <origin xyz="-0.07263 0.08656 0.0" rpy="0.0 0.0 0.0"/> 
   </joint>
   <link name="arm_motor_2">
     <visual>
@@ -155,7 +155,7 @@
   <joint name="base_link_to_arm_motor_2" type="fixed" dont_collapse="true">
     <parent link="base_link"/>
     <child link="arm_motor_2"/>
-      <origin xyz="-0.036315 0.04328 0.0" rpy="1.5707963267948968 0.0 -2.3561944901923453"/> 
+      <origin xyz="0.036315 0.04328 0.0" rpy="-1.5707963267948968 0.0 -0.7853981633974482"/> 
   </joint>
   <link name="motor_2">
     <visual>
@@ -175,7 +175,7 @@
   <joint name="base_link_to_motor_2" type="fixed" dont_collapse="true">
     <parent link="base_link"/>
     <child link="motor_2"/>
-    <origin xyz="-0.07263 0.08656 0.0" rpy="0.0 0.0 0.0"/> 
+    <origin xyz="0.07263 0.08656 0.0" rpy="0.0 0.0 0.0"/> 
   </joint>
   <link name="arm_motor_3">
     <visual>
@@ -201,7 +201,7 @@
   <joint name="base_link_to_arm_motor_3" type="fixed" dont_collapse="true">
     <parent link="base_link"/>
     <child link="arm_motor_3"/>
-      <origin xyz="0.036315 0.04328 0.0" rpy="-1.5707963267948968 0.0 -0.7853981633974482"/> 
+      <origin xyz="-0.036315 -0.04328 0.0" rpy="1.5707963267948968 2.220446049250313e-16 -0.7853981633974482"/> 
   </joint>
   <link name="motor_3">
     <visual>
@@ -221,6 +221,6 @@
   <joint name="base_link_to_motor_3" type="fixed" dont_collapse="true">
     <parent link="base_link"/>
     <child link="motor_3"/>
-    <origin xyz="0.07263 0.08656 0.0" rpy="0.0 0.0 0.0"/> 
+    <origin xyz="-0.07263 -0.08656 0.0" rpy="0.0 0.0 0.0"/> 
   </joint>
 </robot>

@@ -146,12 +146,12 @@ class DragonCfg:
         force_application_level = "motor_link"
         num_motors = 4
         application_mask = [6,7,8,9]
-        motor_directions = [1, -1, 1, -1]
+        motor_directions = [1, 1, -1, -1]
         allocation_matrix = [[ 0., 0., 0., 0.],
                              [ 0., 0., 0., 0.],
                              [ 1., 1., 1., 1.],
-                             [-0.16, -0.16, 0.16, 0.16],
-                             [-0.16, 0.16, 0.16, -0.16],
+                             [-0.08, 0.08, 0.08, -0.08],
+                             [-0.08, 0.08, -0.08, 0.08],
                              [-0.01, 0.01, -0.01, 0.01]]
 
         class motor_model_config:
