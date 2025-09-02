@@ -19,8 +19,8 @@
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.665"/>
-      <inertia ixx="536026.23e-9" ixy="11779.26e-9" ixz="-14649.71e-9" iyx="11779.26e-9" iyy="642831.67e-9" iyz="-11471.79e-9" izx="-14649.71e-9" izy="-11471.79e-9" izz="744280.99e-9"/>
+      <mass value="0.703"/>
+      <inertia ixx="0.002227582" ixy="0.0" ixz="0.0" iyx="0.0" iyy="0.002531389" iyz="0.0" izx="0.0" izy="0.0" izz="0.00303446"/>
     </inertial>
   </link>
   <link name="camera">
@@ -76,7 +76,7 @@
       </material>
     </visual>
     <inertial>
-      <mass value="0.03307"/>
+      <mass value="0.000001"/>
       <inertia ixx="1892.71e-9" ixy="0.0" ixz="0.07e-9" iyx="0.0" iyy="1892.70e-9" iyz="0.03e-9" izx="0.07e-9" izy="0.03e-9" izz="2452.02e-9"/>
     </inertial>
   </link>
@@ -122,7 +122,7 @@
       </material>
     </visual>
     <inertial>
-      <mass value="0.03307"/>
+      <mass value="0.000001"/>
       <inertia ixx="1892.71e-9" ixy="0.0" ixz="0.07e-9" iyx="0.0" iyy="1892.70e-9" iyz="0.03e-9" izx="0.07e-9" izy="0.03e-9" izz="2452.02e-9"/>
     </inertial>
   </link>
@@ -168,7 +168,7 @@
       </material>
     </visual>
     <inertial>
-      <mass value="0.03307"/>
+      <mass value="0.000001"/>
       <inertia ixx="1892.71e-9" ixy="0.0" ixz="0.07e-9" iyx="0.0" iyy="1892.70e-9" iyz="0.03e-9" izx="0.07e-9" izy="0.03e-9" izz="2452.02e-9"/>
     </inertial>
   </link>
@@ -214,7 +214,7 @@
       </material>
     </visual>
     <inertial>
-      <mass value="0.03307"/>
+      <mass value="0.000001"/>
       <inertia ixx="1892.71e-9" ixy="0.0" ixz="0.07e-9" iyx="0.0" iyy="1892.70e-9" iyz="0.03e-9" izx="0.07e-9" izy="0.03e-9" izz="2452.02e-9"/>
     </inertial>
   </link>

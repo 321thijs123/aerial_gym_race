@@ -165,7 +165,7 @@ class DragonCfg:
             max_thrust = 1466.9 / 1000 * 9.81
             min_thrust = 0.0
             max_thrust_rate = 5000000.0
-            thrust_to_torque_ratio = 0.01
+            thrust_to_torque_ratio = 0.012
             use_discrete_approximation = True
             integration_scheme = "rk4" #"euler"
 
