@@ -15,7 +15,7 @@ from aerial_gym.config.robot_config.snakey_config import SnakeyCfg
 from aerial_gym.config.robot_config.snakey5_config import Snakey5Cfg
 from aerial_gym.config.robot_config.snakey6_config import Snakey6Cfg
 from aerial_gym.config.robot_config.tinyprop_config import TinyPropCfg
-from aerial_gym.config.robot_config.dragon_config import DragonCfg, DragonWithCameraCfg
+from aerial_gym.config.robot_config.dragon_config import DragonCfg, DragonWithCameraCfg, DragonExactCfg
 
 from aerial_gym.config.robot_config.lmf2_config import LMF2Cfg
 
@@ -50,6 +50,7 @@ robot_registry.register("lmf2", BaseMultirotor, LMF2Cfg)
 robot_registry.register("tinyprop", BaseMultirotor, TinyPropCfg)
 robot_registry.register("dragon", BaseMultirotor, DragonCfg)
 robot_registry.register("dragon_with_camera", BaseMultirotor, DragonWithCameraCfg)
+robot_registry.register("dragon_exact", BaseMultirotor, DragonExactCfg)
 
 # register the special robot classes here for working with the examples
 robot_registry.register("base_quadrotor_with_imu", BaseMultirotor, BaseQuadWithImuCfg)

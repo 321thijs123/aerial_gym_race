@@ -54,6 +54,7 @@ class BaseMultirotor(BaseRobot):
         self.control_allocator = None
         self.output_forces = None
         self.output_torques = None
+        self.action_scaling = None
 
         logger.debug("[DONE] Initializing BaseQuadrotor")
 
@@ -87,6 +88,8 @@ class BaseMultirotor(BaseRobot):
         global_tensor_dict["robot_body_angvel"] = self.robot_body_angvel
         global_tensor_dict["robot_body_linvel"] = self.robot_body_linvel
         global_tensor_dict["robot_euler_angles"] = self.robot_euler_angles
+
+        self.action_scaling = torch.ones(self.num_envs, device=self.device, requires_grad=False)
 
         global_tensor_dict["num_robot_actions"] = self.controller_config.num_actions
 
@@ -182,6 +185,8 @@ class BaseMultirotor(BaseRobot):
         random_state = torch_rand_float_tensor(self.min_init_state, self.max_init_state)
 
         self.robot_state[env_ids, 0:3] = random_state[env_ids, 0:3]
+
+        self.action_scaling[env_ids] = self.cfg.action_scaling_min + torch.rand(self.num_envs, device=self.device, requires_grad=False)[env_ids] * (self.cfg.action_scaling_max - self.cfg.action_scaling_min)
 
         # logger.debug(
         #     f"Random state: {random_state[0]}, min init state: {self.min_init_state[0]}, max init state: {self.max_init_state[0]}"
@@ -314,7 +319,7 @@ class BaseMultirotor(BaseRobot):
         self.update_states()
         if action_tensor.shape[0] != self.num_envs:
             raise ValueError("Action tensor does not have the correct number of environments")
-        self.action_tensor[:] = action_tensor
+        self.action_tensor[:] = action_tensor * self.action_scaling.unsqueeze(1)
         # calling controller leads to control allocation happening, and
         self.call_controller()
         self.simulate_drag()

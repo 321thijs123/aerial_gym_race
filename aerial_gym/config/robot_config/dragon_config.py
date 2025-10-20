@@ -14,11 +14,14 @@ from aerial_gym.config.sensor_config.imu_config.base_imu_config import BaseImuCo
 
 class DragonCfg:
 
+    action_scaling_min = 0.9
+    action_scaling_max = 1.1
+
     class init_config:
         # init_state tensor is of the format [ratio_x, ratio_y, ratio_z, roll_radians, pitch_radians, yaw_radians, 1.0 (for maintaining shape), vx, vy, vz, wx, wy, wz]
         min_init_state = [
-            -1.0,
-            -1.0,
+            -0.0,
+            -0.0,
             1.0,
             -np.pi/6,
             -np.pi/6,
@@ -32,8 +35,8 @@ class DragonCfg:
             -0.5,
         ]
         max_init_state = [
-            1.0,
-            1.0,
+            0.0,
+            0.0,
             2.0,
             np.pi/6,
             np.pi/6,
@@ -172,3 +175,8 @@ class DragonCfg:
 class DragonWithCameraCfg(DragonCfg):
     class sensor_config(DragonCfg.sensor_config):
         enable_camera = True
+
+
+class DragonExactCfg(DragonCfg):
+    action_scaling_min = 1.0
+    action_scaling_max = 1.0
