@@ -294,12 +294,12 @@ def get_gate_passings(P0, P1, gates_sin_cos, width=1.0, height=1.0):
     P0_local = torch.empty_like(P0)
     P1_local = torch.empty_like(P1)
 
-    P0_local[:,0] = P0[:,0] * cos_yaw - P0[:,1] * sin_yaw
-    P0_local[:,1] = P0[:,0] * sin_yaw + P0[:,1] * cos_yaw
+    P0_local[:,0] = P0[:,0] * cos_yaw + P0[:,1] * sin_yaw
+    P0_local[:,1] = -P0[:,0] * sin_yaw + P0[:,1] * cos_yaw
     P0_local[:,2] = P0[:,2]
 
-    P1_local[:,0] = P1[:,0] * cos_yaw - P1[:,1] * sin_yaw
-    P1_local[:,1] = P1[:,0] * sin_yaw + P1[:,1] * cos_yaw
+    P1_local[:,0] = P1[:,0] * cos_yaw + P1[:,1] * sin_yaw
+    P1_local[:,1] = -P1[:,0] * sin_yaw + P1[:,1] * cos_yaw
     P1_local[:,2] = P1[:,2]
 
     P_diff = P1_local - P0_local
