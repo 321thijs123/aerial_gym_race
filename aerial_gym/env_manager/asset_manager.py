@@ -58,12 +58,17 @@ class AssetManager:
 
         sampled_asset_states = torch_rand_float_tensor(self.asset_min_state[env_ids, :, :], self.asset_max_state[env_ids, :, :])
 
-        min_dist = 2.0
+        min_gate_dist = 2.0
+        min_origin_dist = 0.5
 
         for i in range(1,num_obstacles_per_env):
             while True:
                 distances = sampled_asset_states[:, :i, 0:3] - sampled_asset_states[:, i, 0:3].unsqueeze(1)
-                too_close = torch.any(torch.norm(distances, dim=2) < min_dist, dim=1)
+
+                too_close = torch.logical_or(
+                    torch.any(torch.norm(distances, dim=2) < min_gate_dist, dim=1),
+                    torch.norm(sampled_asset_states[:, i, 0:3], dim=1) < min_origin_dist
+                )
 
                 if torch.sum(too_close) == 0:
                     break
