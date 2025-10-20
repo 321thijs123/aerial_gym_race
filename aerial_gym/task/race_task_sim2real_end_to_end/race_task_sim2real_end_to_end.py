@@ -339,30 +339,30 @@ def compute_reward(
                      prev_pos_error,
                      crash_dist,
                      gate_passings):
-
-    target_dist = torch.norm(pos_error[:, :3], dim=1)
-
-    # Reward for moving towards gate
-    prev_target_dist = torch.norm(prev_pos_error, dim=1)
-    closer_by_dist = prev_target_dist - target_dist
+    target_dist = torch.norm(pos_error, dim=1)
 
     crashes[:] = torch.where(target_dist > crash_dist, torch.ones_like(crashes), crashes)
 
-    towards_gate_reward = closer_by_dist * torch.logical_not(gate_passings)
+    # Reward for moving towards gate
+    prev_target_dist = torch.norm(prev_pos_error, dim=1)
+    towards_alpha = 100.0
+    towards_dist = (prev_target_dist - target_dist) * towards_alpha
+    towards_gate_reward = towards_dist/(1.0 + torch.abs(towards_dist))
+    towards_gate_reward = towards_gate_reward * torch.logical_not(gate_passings).to(towards_dist.dtype)
 
     # Reward for looking at gate
     cam_pitch = -torch.pi/6
-    cam_ax_b = torch.tensor([torch.cos(cam_pitch), 0.0, -torch.sin(cam_pitch)])
+    cam_ax_b = torch.tensor([torch.cos(cam_pitch), 0.0, -torch.sin(cam_pitch)], device = pos_error.device)
     cam_ax_w = quaternion_apply(quats[:,[3, 0, 1, 2]], cam_ax_b)
 
-    gate_dir = pos_error / torch.norm(pos_error, dim=1, keepdim=True)
+    gate_dir = pos_error / torch.norm(pos_error, dim=1, keepdim=True).clamp_min(1e-6)
 
     look_reward = torch.clamp(torch.sum(cam_ax_w * gate_dir, dim=1) * towards_gate_reward, min=0)
 
     # Reward for not rotating
-    smooth_reward = -torch.abs(angvels_err[:,2])
+    smooth_reward = -torch.norm(angvels_err, dim=1)
 
-    reward = gate_passings * 200 - 0 * crashes + 15 * towards_gate_reward + look_reward * 10 + smooth_reward * 0.2 + 0.01
+    reward = gate_passings * 100 - 50 * crashes + towards_gate_reward + look_reward * 2 + smooth_reward * 0.02
 
     return reward, crashes
 

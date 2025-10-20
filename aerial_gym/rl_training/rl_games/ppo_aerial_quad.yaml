@@ -31,7 +31,7 @@ params:
   config:
     env_name: position_setpoint_task_sim2real
     env_config:
-      num_envs: 8192
+      num_envs: 1024
 
     name: gen_ppo
     reward_shaper:
@@ -39,12 +39,12 @@ params:
       scale_value: 0.1
 
     normalize_advantage: True
-    gamma: 0.999
+    gamma: 0.99
     tau: 0.95
     ppo: True
     learning_rate: 1e-4
     lr_schedule: adaptive
-    kl_threshold: 0.008
+    kl_threshold: 0.016
     save_best_after: 10
     score_to_win: 100000
     grad_norm: 1.0
@@ -52,14 +52,14 @@ params:
     truncate_grads: True
     e_clip: 0.2
     clip_value: False
-    num_actors: 4096
+    num_actors: 1024
     horizon_length: 256
-    minibatch_size: 8192
+    minibatch_size: 16384
     mini_epochs: 4
     critic_coef: 2
     normalize_input: False
     bounds_loss_coef: 0.0001
-    max_epochs: 40000
+    max_epochs: 80000
     normalize_value: True
     use_diagnostics: True
     value_bootstrap: True
