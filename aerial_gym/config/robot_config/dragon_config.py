@@ -66,8 +66,8 @@ class DragonCfg:
         max_force_and_torque_disturbance = [0.001, 0.001, 0.001, 0.00004, 0.00004, 0.00004]#[0.1, 0.1, 0.1, 0.004, 0.004, 0.004]
 
     class damping:
-        linvel_linear_damping_coefficient = [0.0, 0.0, 0.0]  # along the body [x, y, z] axes
-        linvel_quadratic_damping_coefficient = [0.0, 0.0, 0.0]  # along the body [x, y, z] axes
+        linvel_linear_damping_coefficient = [0.086212, 0.15851, 0.074013]  # along the body [x, y, z] axes
+        linvel_quadratic_damping_coefficient = [0.013559, 0.012364, 0.03022]  # along the body [x, y, z] axes
         angular_linear_damping_coefficient = [0.0, 0.0, 0.0]  # along the body [x, y, z] axes
         angular_quadratic_damping_coefficient = [0.0, 0.0, 0.0]  # along the body [x, y, z] axes
 
