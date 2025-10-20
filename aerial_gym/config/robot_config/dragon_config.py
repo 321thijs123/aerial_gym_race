@@ -161,10 +161,10 @@ class DragonCfg:
             use_rps = True
             motor_thrust_constant_min = 4.772e-5
             motor_thrust_constant_max = 4.772e-5
-            motor_time_constant_increasing_min = 0.04
-            motor_time_constant_increasing_max = 0.06
-            motor_time_constant_decreasing_min = 0.04
-            motor_time_constant_decreasing_max = 0.06
+            motor_time_constant_increasing_min = 0.033298
+            motor_time_constant_increasing_max = 0.053298
+            motor_time_constant_decreasing_min = 0.033298
+            motor_time_constant_decreasing_max = 0.053298
             max_thrust = 1466.9 / 1000 * 9.81
             min_thrust = 0.0
             max_thrust_rate = 5000000.0
