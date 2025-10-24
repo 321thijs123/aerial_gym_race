@@ -263,8 +263,8 @@ class RaceTaskSim2RealEndToEnd(BaseTask):
             self.gates_sin_cos[torch.arange(self.num_envs), self.gate_idx]
         )
 
-        if (gate_passings[0]):
-            print(f"Gate {self.gate_idx[0].item()} passed")
+        # if (gate_passings[0]):
+            # print(f"Gate {self.gate_idx[0].item()} passed")
 
         self.gate_idx = (self.gate_idx + gate_passings.long()) % self.num_gates
         self.target_position = self.sim_env.obstacle_manager.obstacle_position[torch.arange(self.num_envs), self.gate_idx, :]

@@ -22,6 +22,10 @@ from aerial_gym.task.race_task_camera.race_task_camera import (
     RaceTaskCamera,
 )
 
+from aerial_gym.task.race_task_stats.race_task_stats import (
+    RaceTaskStats,
+)
+
 from aerial_gym.task.navigation_task.navigation_task import NavigationTask
 
 from aerial_gym.config.task_config.position_setpoint_task_config import (
@@ -80,6 +84,12 @@ task_registry.register_task(
     "race_task_camera",
     RaceTaskCamera,
     race_task_camera_config,
+)
+
+task_registry.register_task(
+    "race_task_stats",
+    RaceTaskStats,
+    race_task_sim2real_end_to_end_config,
 )
 
 task_registry.register_task(
