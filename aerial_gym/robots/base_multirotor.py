@@ -152,6 +152,22 @@ class BaseMultirotor(BaseRobot):
             requires_grad=False,
         )
 
+        self.wind_speed_min = torch.tensor(
+            self.cfg.wind.speed_min,
+            device=self.device,
+            requires_grad=False,
+        ).expand(self.num_envs, -1)
+
+        self.wind_speed_max = torch.tensor(
+            self.cfg.wind.speed_max,
+            device=self.device,
+            requires_grad=False,
+        ).expand(self.num_envs, -1)
+
+        self.wind_speed = torch.zeros(
+            (self.num_envs, 3), device=self.device, requires_grad=False
+        )
+
         if self.force_application_level == "motor_link":
             self.application_mask = torch.tensor(
                 self.cfg.control_allocator_config.application_mask,
@@ -186,7 +202,9 @@ class BaseMultirotor(BaseRobot):
 
         self.robot_state[env_ids, 0:3] = random_state[env_ids, 0:3]
 
-        self.action_scaling[env_ids] = self.cfg.action_scaling_min + torch.rand(self.num_envs, device=self.device, requires_grad=False)[env_ids] * (self.cfg.action_scaling_max - self.cfg.action_scaling_min)
+        self.action_scaling[env_ids] = self.cfg.action_scaling_min + torch.rand_like(self.action_scaling[env_ids]) * (self.cfg.action_scaling_max - self.cfg.action_scaling_min)
+
+        self.wind_speed[env_ids] = self.wind_speed_min[env_ids] + torch.rand_like(self.wind_speed[env_ids]) * (self.wind_speed_max[env_ids] - self.wind_speed_min[env_ids])
 
         # logger.debug(
         #     f"Random state: {random_state[0]}, min init state: {self.min_init_state[0]}, max init state: {self.max_init_state[0]}"
@@ -261,13 +279,16 @@ class BaseMultirotor(BaseRobot):
         self.robot_torque_tensors[:] = self.output_torques
 
     def simulate_drag(self):
+        body_wind_speed = quat_rotate_inverse(self.robot_orientation, self.wind_speed)
+        body_air_speed = self.robot_body_linvel - body_wind_speed
+
         self.robot_body_vel_drag_linear = (
-            -self.body_vel_linear_damping_coefficient * self.robot_body_linvel
+            -self.body_vel_linear_damping_coefficient * body_air_speed
         )
         self.robot_body_vel_drag_quadratic = (
             -self.body_vel_quadratic_damping_coefficient
-            * torch.norm(self.robot_body_linvel, dim=-1).unsqueeze(-1)
-            * self.robot_body_linvel
+            * torch.norm(body_air_speed, dim=-1).unsqueeze(-1)
+            * body_air_speed
         )
         self.robot_body_vel_drag = (
             self.robot_body_vel_drag_linear + self.robot_body_vel_drag_quadratic

@@ -61,7 +61,7 @@ class DragonCfg:
         imu_config = BaseImuConfig
 
     class disturbance:
-        enable_disturbance = False 
+        enable_disturbance = True 
         prob_apply_disturbance = 0.02
         max_force_and_torque_disturbance = [0.001, 0.001, 0.001, 0.00004, 0.00004, 0.00004]#[0.1, 0.1, 0.1, 0.004, 0.004, 0.004]
 
@@ -70,6 +70,10 @@ class DragonCfg:
         linvel_quadratic_damping_coefficient = [0.013559, 0.012364, 0.03022]  # along the body [x, y, z] axes
         angular_linear_damping_coefficient = [0.0, 0.0, 0.0]  # along the body [x, y, z] axes
         angular_quadratic_damping_coefficient = [0.0, 0.0, 0.0]  # along the body [x, y, z] axes
+    
+    class wind:
+        speed_min = [-4.0, -4.0, -1.0]
+        speed_max = [4.0, 4.0, 1.0]
 
     class gyro_effects:
         rotor_inertia = 2224.04e-9
