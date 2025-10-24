@@ -39,7 +39,7 @@ params:
       scale_value: 0.1
 
     normalize_advantage: True
-    gamma: 0.99
+    gamma: 0.997
     tau: 0.95
     ppo: True
     learning_rate: 1e-4
