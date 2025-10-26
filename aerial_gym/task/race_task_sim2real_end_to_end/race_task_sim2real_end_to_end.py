@@ -263,6 +263,11 @@ class RaceTaskSim2RealEndToEnd(BaseTask):
             self.gates_sin_cos[torch.arange(self.num_envs), self.gate_idx]
         )
 
+        if (self.task_config.enforce_gate_direction):
+            gate_passings = (gate_passings == 1.0)
+        elif (self.task_config.enforce_gate_direction):
+            gate_passings = (gate_passings != 0.0)
+
         # if (gate_passings[0]):
             # print(f"Gate {self.gate_idx[0].item()} passed")
 
@@ -313,7 +318,7 @@ def get_gate_passings(P0, P1, gates_sin_cos, width=1.0, height=1.0):
 
     through_plane = torch.ne(torch.sign(P0_local[:,0]), torch.sign(P1_local[:,0]))
 
-    return torch.logical_and(in_bounds, through_plane)
+    return torch.logical_and(in_bounds, through_plane) * torch.sign(P0_local[:,0])
 
 @torch.jit.script
 def exp_func(x, gain, exp):
