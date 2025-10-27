@@ -14,8 +14,8 @@ from aerial_gym.task.position_setpoint_task_acceleration_sim2real.position_setpo
     PositionSetpointTaskAccelerationSim2Real,
 )
 
-from aerial_gym.task.race_task_sim2real_end_to_end.race_task_sim2real_end_to_end import (
-    RaceTaskSim2RealEndToEnd,
+from aerial_gym.task.race_task.race_task import (
+    RaceTask,
 )
 
 from aerial_gym.task.race_task_camera.race_task_camera import (
@@ -40,8 +40,8 @@ from aerial_gym.config.task_config.position_setpoint_task_sim2real_end_to_end_co
     task_config as position_setpoint_task_sim2real_end_to_end_config,
 )
 
-from aerial_gym.config.task_config.race_task_sim2real_end_to_end_config import (
-    task_config as race_task_sim2real_end_to_end_config,
+from aerial_gym.config.task_config.race_task_config import (
+    task_config as race_task_config,
 )
 
 from aerial_gym.config.task_config.race_task_camera_config import (
@@ -75,9 +75,9 @@ task_registry.register_task(
 )
 
 task_registry.register_task(
-    "race_task_sim2real_end_to_end",
-    RaceTaskSim2RealEndToEnd,
-    race_task_sim2real_end_to_end_config,
+    "race_task",
+    RaceTask,
+    race_task_config,
 )
 
 task_registry.register_task(
@@ -89,7 +89,7 @@ task_registry.register_task(
 task_registry.register_task(
     "race_task_stats",
     RaceTaskStats,
-    race_task_sim2real_end_to_end_config,
+    race_task_config,
 )
 
 task_registry.register_task(

@@ -17,7 +17,7 @@ def dict_to_class(dict):
     return type("ClassFromDict", (object,), dict)
 
 
-class RaceTaskSim2RealEndToEnd(BaseTask):
+class RaceTask(BaseTask):
     def __init__(
         self, task_config, seed=None, num_envs=None, headless=None, device=None, use_warp=None
     ):

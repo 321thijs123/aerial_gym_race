@@ -9,8 +9,8 @@ from aerial_gym.utils.logging import CustomLogger
 
 from gym.spaces import Dict, Box
 
-from aerial_gym.task.race_task_sim2real_end_to_end.race_task_sim2real_end_to_end import (
-    RaceTaskSim2RealEndToEnd,
+from aerial_gym.task.race_task.race_task import (
+    RaceTask,
 )
 
 logger = CustomLogger("race_task_camera")
@@ -19,7 +19,7 @@ from PIL import Image
 from pathlib import Path
 import imageio
 
-class RaceTaskCamera(RaceTaskSim2RealEndToEnd):
+class RaceTaskCamera(RaceTask):
     def __init__(
         self, task_config, seed=None, num_envs=None, headless=None, device=None, use_warp=None
     ):

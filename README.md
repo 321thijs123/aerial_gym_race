@@ -13,13 +13,13 @@ Refer to the installation section of the [getting started](https://ntnu-arl.gith
 ## Training a policy
 ```BASH
 cd ~/workspaces/aerial_gym_ws/src/aerial_gym_race/aerial_gym/rl_training/rl_games
-python3 runner.py --task=race_task_sim2real_end_to_end 
+python3 runner.py --task=race_task 
 ```
 
 ## Playing a trained policy
 In the command below replace `PATH_TO_WEIGHTS` with the path to the weights of the trained policy, for example: `./runs/gen_ppo_xx-xx-xx-xx/nn/gen_ppo.pth`.
 ```BASH
-python3 runner.py --task=race_task_sim2real_end_to_end --play --checkpoint=PATH_TO_WEIGHTS --num_envs=1
+python3 runner.py --task=race_task --play --checkpoint=PATH_TO_WEIGHTS --num_envs=1
 ```
 
 ## Generating an FPV video of a trained policy

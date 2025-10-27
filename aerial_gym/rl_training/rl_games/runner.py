@@ -146,10 +146,10 @@ env_configurations.register(
 )
 
 env_configurations.register(
-    "race_task_sim2real_end_to_end",
+    "race_task",
     {
         "env_creator": lambda **kwargs: task_registry.make_task(
-            "race_task_sim2real_end_to_end", **kwargs
+            "race_task", **kwargs
         ),
         "vecenv_type": "AERIAL-RLGPU",
     },
